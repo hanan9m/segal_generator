@@ -43,6 +43,7 @@ PREDICTION_FILE_SRC = path / 'static' / 'predictions.txt'
 async def upload(request):
     data = await request.form()
     text = data["text"]
+    print(text)
     number =  data["number"]
     # bytes = base64.b64decode(img_bytes)
     return predict_from_bytes(text, int(number))
@@ -51,6 +52,7 @@ async def upload(request):
 def predict_from_bytes(text, number):
     # img = open_image(BytesIO(bytes))
     result = learn.predict(text, number, temperature=0.75)
+    print(result)
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
     result_html1 = path / 'static' / 'result1.html'
     result_html2 = path / 'static' / 'result2.html'
