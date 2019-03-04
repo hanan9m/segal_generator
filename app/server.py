@@ -5,6 +5,7 @@ from starlette.middleware.cors import CORSMiddleware
 import uvicorn, aiohttp, asyncio
 from io import BytesIO
 from fastai.vision import *
+from segal_utils import *
 import base64
 
 model_file_url = 'https://www.dropbox.com/s/grsnoaj10mojots/amit_generate.pkl?raw=1'
@@ -50,7 +51,8 @@ async def upload(request):
 
 def predict_from_bytes(text, number):
     # img = open_image(BytesIO(bytes))
-    result = learn.predict(text, number, temperature=0.75)
+    predicter = NextWord(learn, text)
+    result = predicter.generate(num)
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
     result_html1 = path / 'static' / 'result1.html'
     result_html2 = path / 'static' / 'result2.html'
