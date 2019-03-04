@@ -40,10 +40,10 @@ tasks = [asyncio.ensure_future(setup_learner(model_file_url, model_file_name))]
 learn = loop.run_until_complete(asyncio.gather(*tasks))[0]
 loop.close()
 
-loop = asyncio.get_event_loop()
-tasks = [asyncio.ensure_future(setup_learner(classification_file_url, classification_file_name))]
-classification = loop.run_until_complete(asyncio.gather(*tasks))[0]
-loop.close()
+loop2 = asyncio.get_event_loop()
+tasks2 = [asyncio.ensure_future(setup_learner(classification_file_url, classification_file_name))]
+classification = loop.run_until_complete(asyncio.gather(*tasks2))[0]
+loop2.close()
 
 
 PREDICTION_FILE_SRC = path / 'static' / 'predictions.txt'
