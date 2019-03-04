@@ -7,7 +7,7 @@ from io import BytesIO
 from fastai.vision import *
 import base64
 
-model_file_url = 'https://drive.google.com/file/d/1NLejSsFsvvdPH8z4359vCz3Xjt9qsC2m/view?usp=sharing'
+model_file_url = 'https://www.dropbox.com/s/grsnoaj10mojots/amit_generate.pkl?raw=1'
 model_file_name = 'amit_generate.pkl'
 
 path = Path(__file__).parent
