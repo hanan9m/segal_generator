@@ -56,7 +56,9 @@ def predict_from_bytes(text, number):
     result_html2 = path / 'static' / 'result2.html'
 
     result_html = str(result_html1.open().read() + str(result) + result_html2.open().read())
-    return HTMLResponse(result_html)
+    index_html = path / 'static' / 'index.html'
+    return HTMLResponse(index_html.open().read())
+#     return HTMLResponse(result_html)
 
 
 @app.route("/")
