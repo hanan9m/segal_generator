@@ -45,7 +45,7 @@ async def upload(request):
     text = await (data["text"].read())
     number =  await (data["num"].read())
     # bytes = base64.b64decode(img_bytes)
-    return predict_from_bytes(text, number)
+    return predict_from_bytes(text, int(number))
 
 
 def predict_from_bytes(text, number):
