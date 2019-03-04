@@ -52,7 +52,7 @@ async def upload(request):
 def predict_from_bytes(text, number):
     # img = open_image(BytesIO(bytes))
     predicter = NextWord(learn, text)
-    result = predicter.generate(num)
+    result = predicter.generate(number)
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
     result_html1 = path / 'static' / 'result1.html'
     result_html2 = path / 'static' / 'result2.html'
