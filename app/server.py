@@ -56,7 +56,7 @@ def predict_from_bytes(text, number):
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
     result_html1 = path / 'static' / 'result1.html'
     result_html2 = path / 'static' / 'result2.html'
-    result_html = str(result_html1.open().read() + result + result_html2.open().read())
+    result_html = str(result_html1.open().read() + str(result) + result_html2.open().read())
     return HTMLResponse(result_html)
 
 
