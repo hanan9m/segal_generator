@@ -35,12 +35,12 @@ async def setup_learner(model_file_url, model_file_name):
     return learn
 
 
-loop = asyncio.get_event_loop()
+loop = asyncio.new_event_loop()
 tasks = [asyncio.ensure_future(setup_learner(model_file_url, model_file_name))]
 learn = loop.run_until_complete(asyncio.gather(*tasks))[0]
 loop.close()
 
-loop2 = asyncio.get_event_loop()
+loop2 = asyncio.new_event_loop()
 tasks2 = [asyncio.ensure_future(setup_learner(classification_file_url, classification_file_name))]
 classification = loop2.run_until_complete(asyncio.gather(*tasks2))[0]
 loop2.close()
