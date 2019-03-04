@@ -42,7 +42,7 @@ loop.close()
 
 loop2 = asyncio.get_event_loop()
 tasks2 = [asyncio.ensure_future(setup_learner(classification_file_url, classification_file_name))]
-classification = loop.run_until_complete(asyncio.gather(*tasks2))[0]
+classification = loop2.run_until_complete(asyncio.gather(*tasks2))[0]
 loop2.close()
 
 
