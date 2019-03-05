@@ -51,13 +51,17 @@ async def upload(request):
     data = await request.form()
     text = data["text"]
     number =  data["number"]
+    yes_no = data['yes_no']
     # bytes = base64.b64decode(img_bytes)
-    return predict_from_bytes(str(text), int(number))
+    return predict_from_bytes(str(text), int(number), int(yes_no))
 
 
-def predict_from_bytes(text, number):
+def predict_from_bytes(text, number, yes_no):
     # img = open_image(BytesIO(bytes))
-    predicter = NextWord(learn, text, classification=classification)
+    if yes_no:
+        predicter = NextWord(learn, text, classification=classification)
+    else:
+        predicter = NextWord(learn, text)
     predicter.generate(number)
     result = predicter.sentence
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
