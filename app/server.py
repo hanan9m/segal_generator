@@ -11,9 +11,6 @@ import base64
 model_file_url = 'https://www.dropbox.com/s/grsnoaj10mojots/amit_generate.pkl?raw=1'
 model_file_name = 'amit_generate.pkl'
 
-classification_file_url = 'https://www.dropbox.com/s/rug0qcy9w438ih7/amit_classification.pkl?raw=1'
-classification_file_name = 'classification.pkl'
-
 path = Path(__file__).parent
 
 app = Starlette()
@@ -37,9 +34,7 @@ async def setup_learner(model_file_url, model_file_name):
 
 loop = asyncio.get_event_loop()
 tasks = [asyncio.ensure_future(setup_learner(model_file_url, model_file_name))]
-tasks2 = [asyncio.ensure_future(setup_learner(classification_file_url, classification_file_name))]
 learn = loop.run_until_complete(asyncio.gather(*tasks))[0]
-classification = loop.run_until_complete(asyncio.gather(*tasks2))[0]
 loop.close()
 
 
@@ -50,22 +45,18 @@ PREDICTION_FILE_SRC = path / 'static' / 'predictions.txt'
 async def upload(request):
     data = await request.form()
     text = data["text"]
-    number =  data["number"]
     try:
-        yes_no = data['yes_no']
+        number =  data["number"]
     except:
-        yes_no = False
+        number =  1
     # bytes = base64.b64decode(img_bytes)
-    return predict_from_bytes(str(text), int(number), int(yes_no))
+    return predict_from_bytes(str(text), int(number))
 
 
-def predict_from_bytes(text, number, yes_no):
+def predict_from_bytes(text, number):
     # img = open_image(BytesIO(bytes))
-    if yes_no:
-        predicter = NextWord(learn, text, classification=classification)
-    else:
-        predicter = NextWord(learn, text)
-    predicter.generate(number)
+    predicter = NextWord(learn, text)
+    predicter.generate(len(text.split(" ")) + number)
     result = predicter.sentence
     # predictions = sorted(zip(classes, map(float, losses)), key=lambda p: p[1], reverse=True)
     result_html1 = path / 'static' / 'result1.html'
