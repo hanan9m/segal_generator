@@ -51,7 +51,10 @@ async def upload(request):
     data = await request.form()
     text = data["text"]
     number =  data["number"]
-    yes_no = data['yes_no']
+    try:
+        yes_no = data['yes_no']
+    except:
+        yes_no = False
     # bytes = base64.b64decode(img_bytes)
     return predict_from_bytes(str(text), int(number), int(yes_no))
 
