@@ -9,13 +9,13 @@ class NextWord():
     
     def predict_next(self):
         sen = " ".join(self.sentence.split(" ")[-12:])
-        self.next = self.predicter.predict(sen, 1, temperature=0.8).split(" ")[-1]
+        self.next = self.predicter.predict(sen, 1, temperature=0.9).split(" ")[-1]
     
     def print_next(self):
         print (self.next)
     
     def valid_word(self):
-        return self.next not in ["\n", " ", '', '"', "/", "'", ".."]
+        return self.next not in ["\n", " ", '', '"', "/", "'", "..", ":"]
     
     def valid_comma_points(self):
         if self.next not in [",", "."]:

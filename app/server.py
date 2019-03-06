@@ -45,10 +45,7 @@ PREDICTION_FILE_SRC = path / 'static' / 'predictions.txt'
 async def upload(request):
     data = await request.form()
     text = data["text"]
-    try:
-        number =  data["number"]
-    except:
-        number =  1
+    number =  1
     # bytes = base64.b64decode(img_bytes)
     return predict_from_bytes(str(text), int(number))
 
