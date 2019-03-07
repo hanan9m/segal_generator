@@ -21,7 +21,7 @@ class NextWord():
         if self.next not in [",", "."]:
             return True
         else:
-            return not set([",", "."]) & set(self.sentence.split(" ")[-4:])
+            return (not set([",", "."]) & set(self.sentence.split(" ")[-4:])) and (len(self.sentence.split(" ")) > 8)
     
     def valid_class(self):
         if self.classification:
